@@ -48,11 +48,10 @@ public class RealTimeFlight
 			bufRead = new BufferedReader(file);
 			String line = bufRead.readLine();
 			int compteur =1;
-			ArrayList <RealTimeFlight> r = new ArrayList<>();
 			while(line != null){ //Tant qu'on a des lignes a lire dans le fichier
 				String[] array = line.split(",");
 				String[] parts = array[0].split("///");
-				System.out.println("Avion "+compteur+" :\n");
+				//System.out.println("Avion "+compteur+" :\n");
 				
 				//time part
 				Timestamp t1 = new Timestamp(Long.parseLong(parts[0])*1);
@@ -81,7 +80,7 @@ public class RealTimeFlight
 				}
 				Timestamp t = new Timestamp(b*1000);
 				Date date = new Date(t.getTime());
-				System.out.println("Date de la dernière MaJ de la position : "+date+"\n");
+				//System.out.println("Date de la dernière MaJ de la position : "+date+"\n");
 				
 				if(parts[8] !=null){
 					try{
@@ -96,12 +95,12 @@ public class RealTimeFlight
 				}
 				t = new Timestamp(b*1000);
 				Date date2 = new Date(t.getTime());
-				
+				/*
 				System.out.println("Date de la dernière MaJ de la vitesse : "+date2+"\n");
 
 				System.out.println("Vitesse verticale (en m/s) : "+parts[9]+"\n");
 				System.out.println("Code ICAO du pays : "+parts[10]+"\n");
-				System.out.println("Au sol : "+parts[11]+"\n");
+				System.out.println("Au sol : "+parts[11]+"\n");*/
 				Boolean bool;
 				if(parts[11].equals("false")){
 					bool = false;
@@ -114,23 +113,26 @@ public class RealTimeFlight
 				if(!parts[9].equals("null"))
 				{
 					RealTimeFlight chR = new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,Float.parseFloat(parts[9]),parts[10],bool);
-					MainSystem.updateRealTimeFlight(parts[1], chR);
-					r.add(new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,Float.parseFloat(parts[9]),parts[10],bool));
-				
+					MainSystem.updateRealTimeFlight(parts[1], chR);				
 				}
 				else{
 					Float f = new Float(0.0);
 					RealTimeFlight chR = new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,f,parts[10],bool);
 					MainSystem.updateRealTimeFlight(parts[1], chR);
-					r.add(new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,f,parts[10],bool));
-				}
+					}
 			}
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
+	}
+	public float getLatitude()
+	{
+		return latitude;
+	}
+	public float getLongitude()
+	{
+		return longitude;
 	}
 }

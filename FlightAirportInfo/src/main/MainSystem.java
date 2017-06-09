@@ -271,6 +271,10 @@ public class MainSystem
 			e.printStackTrace();
 		}	
 	}
+	public static HashMap<String,ArrayList<RealTimeFlight>> getRealTimeFlight()
+	{
+		return realTimeFlight;
+	}
 	public static void updateRealTimeFlight(String id,RealTimeFlight r)
 	{
 		if(realTimeFlight.containsKey(id))
