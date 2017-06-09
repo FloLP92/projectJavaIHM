@@ -111,14 +111,18 @@ public class RealTimeFlight
 				}
 				line = bufRead.readLine();
 				compteur++;
-				if(!parts[9].equals("null")){
+				if(!parts[9].equals("null"))
+				{
+					RealTimeFlight chR = new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,Float.parseFloat(parts[9]),parts[10],bool);
+					MainSystem.updateRealTimeFlight(parts[1], chR);
 					r.add(new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,Float.parseFloat(parts[9]),parts[10],bool));
 				
 				}
 				else{
 					Float f = new Float(0.0);
+					RealTimeFlight chR = new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,f,parts[10],bool);
+					MainSystem.updateRealTimeFlight(parts[1], chR);
 					r.add(new RealTimeFlight(time,parts[1],Float.parseFloat(parts[2]),Float.parseFloat(parts[3]),Float.parseFloat(parts[4]),Float.parseFloat(parts[5]),Float.parseFloat(parts[6]),date,date2,f,parts[10],bool));
-
 				}
 			}
 			

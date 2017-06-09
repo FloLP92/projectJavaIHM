@@ -32,6 +32,7 @@ public class MainSystem
 	private static HashMap<String,Airport> listAirports;
 	private static HashMap<String,Flight> listFlights;
 	private static HashMap<String,Pays> listPays;
+	private static HashMap<String,ArrayList<RealTimeFlight>> realTimeFlight;
 	private static JFrame frame;
 	private static JPanel panel;
 	private static EarthTest app;
@@ -43,6 +44,7 @@ public class MainSystem
 		listAirports = new HashMap<String,Airport>();
 		listFlights = new HashMap<String,Flight>();
 		listPays = new HashMap<String,Pays>();
+		realTimeFlight = new HashMap<String,ArrayList<RealTimeFlight>>();
 		
 		MainSystem.lireFichier("ressources/airports.dat");
 		MainSystem.lireFichier("ressources/flights.dat");
@@ -281,6 +283,18 @@ public class MainSystem
 		}catch(IOException e){
 			e.printStackTrace();
 		}	
+	}
+	public static void updateRealTimeFlight(String id,RealTimeFlight r)
+	{
+		if(realTimeFlight.containsKey(id))
+			realTimeFlight.get(id).add(r);
+		else
+		{
+			ArrayList a = new ArrayList<RealTimeFlight>();
+			a.add(r);
+			realTimeFlight.put(id,a);
+		}
+			
 	}
 	public static void main(String[] args) throws IOException
 	{
