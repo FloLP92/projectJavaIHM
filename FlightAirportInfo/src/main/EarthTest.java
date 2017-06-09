@@ -56,6 +56,7 @@ public class EarthTest extends SimpleApplication {
 		for(Flight f : MainSystem.getListFlight().values())
 		{
 			Airport airportDepart = f.getAirportDepart();
+			
 			float chLat = airportDepart.getLatitude();
 			float chLong = airportDepart.getLongitude();
 			float chAlt = 3f;
@@ -67,25 +68,35 @@ public class EarthTest extends SimpleApplication {
 			matPlane.setColor("Color", ColorRGBA.Red);
 			planeSpatial.setMaterial(matPlane);
 			
-			Vector3f v = new Vector3f(1,0,0);
-			Vector3f oldVect = new Vector3f(chLat,chLong,chAlt);
-			for(int i=0;i<100;i++)
+			Vector3f oldVect = geoCoordTo3dCoord(chLat,chLong);
+			System.out.println(f.getId());
+			if(MainSystem.getRealTimeFlight().containsKey(f.getId()))
 			{
-				float t=i/5.0f;
-				Vector3f newVect = new Vector3f(FastMath.cos(t),t/5.0f,FastMath.sin(t));
-				Line line = new Line(oldVect, newVect);
-				Geometry lineGeo = new Geometry("lineGeo", line);
-				Material mat = new Material(assetManager,"Common/MatDefs/Misc/Unshaded.j3md");
-				mat.getAdditionalRenderState().setLineWidth(2.0f);
-				mat.setColor("Color", ColorRGBA.Red);
-				lineGeo.setMaterial(mat);
-				lineGeo.setLocalTranslation(0.0f,0.0f,8.0f);
-				LinesNode.setMaterial(mat);
-				LinesNode.attachChild(lineGeo);
-				rootNode.attachChild(LinesNode);
-				oldVect = newVect;
+				for(int i=0;i<MainSystem.getRealTimeFlight().get(f.getId()).size();i++)
+				{
+					
+					System.out.println("a");
+					//float t=i/5.0f;
+					//Vector3f newVect = new Vector3f(FastMath.cos(t),t/5.0f,FastMath.sin(t));
+					chLat = MainSystem.getRealTimeFlight()
+							.get(f.getId()).get(i).getLatitude();
+					chLong = MainSystem.getRealTimeFlight()
+							.get(f.getId()).get(i).getLongitude();
+					Vector3f newVect = geoCoordTo3dCoord(chLat,chLong);
+					Line line = new Line(oldVect, newVect);
+					Geometry lineGeo = new Geometry("lineGeo", line);
+					Material mat = new Material(assetManager,"Common/MatDefs/Misc/Unshaded.j3md");
+					mat.getAdditionalRenderState().setLineWidth(20.0f);
+					mat.setColor("Color", ColorRGBA.Red);
+					lineGeo.setMaterial(mat);
+					lineGeo.setLocalTranslation(0.0f,0.0f,8.0f);
+					LinesNode.setMaterial(mat);
+					LinesNode.attachChild(lineGeo);
+					rootNode.attachChild(LinesNode);
+					oldVect = newVect;
+				}
 			}
-			planeSpatial.setLocalTranslation(v);
+			//planeSpatial.setLocalTranslation(v);
 			
 		}
 		

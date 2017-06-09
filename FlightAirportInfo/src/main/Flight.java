@@ -26,7 +26,10 @@ public class Flight
 		return "Flight "+idVol+" "+airportDepart+" -> "+airportDestination
 				+" "+codeCompagnie+" "+modele;
 	}
-	
+	public String getId()
+	{
+		return idVol;
+	}
 	public Airport getAirportDepart()
 	{
 		return airportDepart;
