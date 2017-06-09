@@ -137,19 +137,6 @@ public class MainSystem
 				buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 				buttonPane.add(Box.createHorizontalGlue());
 				buttonPane.add(okButton);
-				/*
-				 * myButton.addActionListener(new ActionListener(){
-				 * 	public void actionPerformed(ActionEvent e){
-				 * 		canvasApplication.enqueue(new Callable<Object>(){
-				 * 		public Object call() throws Exception
-						 * {
-						 * canvasApplication.doSomething();
-						 * return null;
-						 * }
-				 * 	}
-				 * 	}
-				 * }
-				 */
 
 				pane.add(buttonPane);
 				pane.add(Box.createRigidArea(new Dimension(0, 5)));
